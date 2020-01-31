@@ -40,6 +40,11 @@ const pairs = Array.from(combinator);
 
 [TypeScript Playground]()
 
+### Limitation
+
+Currently, type definition supports less than 20 dimentions.  
+Runtime is OK but type is not recognized.
+
 ## Contribution
 
 1. Fork this repository
