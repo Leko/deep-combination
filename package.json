@@ -1,7 +1,7 @@
 {
   "name": "deep-combination",
   "version": "0.0.1",
-  "description": "Multi-dimention pair generator",
+  "description": "Generate pair of all combination with type-safe.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/generated.d.ts",
