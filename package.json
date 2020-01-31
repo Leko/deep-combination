@@ -1,5 +1,5 @@
 {
-  "name": "deep-combinations",
+  "name": "deep-combination",
   "version": "0.0.1",
   "description": "Multi-dimention pair generator",
   "main": "dist/cjs/index.js",
