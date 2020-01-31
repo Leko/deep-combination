@@ -2,15 +2,14 @@ import fs from "fs";
 import path from "path";
 import { MAX_DEPTH } from "../src/constants";
 
-const DIST = path.join(__dirname, "..", "dist", "generated.d.ts");
+const DIST = path.join(__dirname, "..", "types", "index.d.ts");
 
 let types = [
   `
 interface DeepCombination0 extends Iterable<[never]> {
   addDimention<T1>(items: T1[]): DeepCombination1<T1>;
-  makeCombinations(depth: number, items: [never]): Generator<[never]>;
 }
-export function createCombinator<T1>(init?: [T1[]]): DeepCombination0`
+export declare function createCombinator(): DeepCombination0`
 ];
 
 for (let i = 1; i <= MAX_DEPTH; i++) {
@@ -23,9 +22,8 @@ interface DeepCombination${i}<${t}> extends Iterable<[${t}]> {
       ? `DeepCombination${i + 1}<${t}, T${i + 1}>`
       : "DeepCombinationAmbiguous"
   };
-  makeCombinations(depth: number, items: [${t}]): Generator<[${t}]>;
 }
-export function createCombinator<${t}>(init?: [${t
+export declare function createCombinator<${t}>(init: [${t
     .split(", ")
     .map(t => t + "[]")
     .join(", ")}]): DeepCombination${i}<${t}>`);
@@ -34,8 +32,8 @@ export function createCombinator<${t}>(init?: [${t
 types.push(`
 interface DeepCombinationAmbiguous extends Iterable<unknown[]> {
   addDimention(items: unknown[]): DeepCombinationAmbiguous;
-  makeCombinations(depth: number, items: unknown[]): Generator<unknown[]>;
 }
-export function createCombinator(init?: any[][]): DeepCombinationAmbiguous`);
+export declare function createCombinator(init?: any[][]): DeepCombinationAmbiguous
+export {};`);
 
 fs.writeFileSync(DIST, types.join("\n\n"));
